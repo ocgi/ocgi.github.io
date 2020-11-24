@@ -1,3 +1,188 @@
-baseURL = "http://example.org/"
-languageCode = "en-us"
+baseURL = "https://ocgi.github.io/"
+defaultContentLanguage = 'en'
+# disableLanguages = ['en']
+enableGitInfo = true
+theme = "dot-hugo-documentation-theme"
 title = "OCGI"
+
+[markup.goldmark.renderer]
+unsafe = true
+
+############################# Default Parameters ##########################
+[params]
+# logo is for all page
+logo = ""
+# logo white is for homepage logo, you can use colorful logo too...
+logo_white = ""
+# when logo is empty, it will shown your site title
+
+# customize color
+body_color = "#f9f9f9"
+light_color = "#f8f9fa"
+primary_color = "#0052d9"
+text_color = "#636363"
+text_color_dark = "#242738"
+white_color = "#ffffff"
+
+# font family
+font_family = "lato" # Choose font family from : https://fonts.google.com/
+
+# contact form action
+contact_form_action = "#" # contact form works with : https://formspree.io
+
+############################## social links ##############################
+# [[params.social]]
+# icon = "ti-facebook" # themify icon pack : https://themify.me/themify-icons
+# link = "#" 
+
+# [[params.social]]
+
+# icon = "ti-twitter-alt" # themify icon pack : https://themify.me/themify-icons
+# link = "#" 
+# [[params.social]]
+
+# icon = "ti-github" # themify icon pack : https://themify.me/themify-icons
+# link = "#" 
+# [[params.social]]
+# icon = "ti-linkedin" # themify icon pack : https://themify.me/themify-icons
+# link = "#" 
+
+################################ chiniese Language ######################
+[Languages.zh]
+copyright = "Copyright © 2021 The OCGI Authors"
+languageCode = "zh-cn"
+languageName = "简体中文"
+weight = 0
+
+# banner
+[Languages.zh.params.banner]
+bg_image = "images/banner.png"
+search = false
+subtitle = "Run and Scale Game Server better on Kubernetes"
+title = "Open Cloud-native Game-application Initiative"
+
+# navigation
+[[Languages.zh.menu.main]]
+name = "Docs"
+url = "/zh/docs/"
+weight = 1
+
+[[Languages.zh.menu.main]]
+name = "Github"
+url = "https://github.com/ocgi"
+weight = 2
+
+[Languages.zh.params.quickStart]
+link = '/zh/docs'
+
+# features
+
+[[Languages.zh.params.feature]]
+description = "支持应用交互式更新，应用侧确认之后，才会删除对应的副本"
+icon = "/images/customer/canary_release.png"
+link = '#'
+title = "应用交互式更新"
+
+[[Languages.zh.params.feature]]
+description = "支持Workload原地更新镜像，Pod不用重建，GameServer的本地缓存数据得到保留"
+icon = "/images/customer/inplace_update.png"
+link = '#'
+title = "原地升级"
+
+[[Languages.zh.params.feature]]
+description = "支持多种模式(资源指标/自定义指标/定时/事件/webhook)的Pod扩缩容策略"
+icon = "/images/customer/gpa.png"
+link = '#'
+title = "通用Pod自动扩缩容"
+
+[[Languages.zh.params.feature]]
+description = "缩容时，可由应用指定缩容的顺序"
+icon = "/images/customer/scaling_down_order.png"
+link = '#'
+title = "应用定义缩容顺序"
+
+[[Languages.zh.params.feature]]
+description = "可以与集群自动扩缩容无缝集成，集群缩容时，可以选择任意的副本删除"
+icon = "/images/customer/cluster_autoscaler.png"
+link = '#'
+title = "与集群自动扩缩容集成"
+
+[[Languages.zh.params.feature]]
+description = "所有组件基于K8s构建，完全免费开源，可运行在任何K8s集群之上"
+icon = "/images/customer/opensource.png"
+link = '#'
+title = "开源生态"
+
+[Languages.zh.params.whoUse]
+enable = false
+
+[[Languages.zh.params.whoUse.customer]]
+icon = '/images/customer/nizhan.png'
+
+[[Languages.zh.params.whoUse.customer]]
+icon = '/images/customer/nizhan.png'
+
+################################ English Language ######################
+[Languages.en]
+copyright = "Copyright © 2021 The OCGI Authors"
+languageCode = "en-us"
+languageName = "En"
+
+# banner
+[Languages.en.params.banner]
+bg_image = "images/banner.png"
+search = false
+subtitle = "Run and Scale Game Server better on Kubernetes"
+title = "Open Cloud-native Game-application Initiative"
+
+################## english navigation #################
+[[Languages.en.menu.main]]
+name = "Docs"
+url = "/en/docs/"
+weight = 1
+
+[[Languages.en.menu.main]]
+name = "Github"
+url = "https://github.com/ocgi"
+weight = 2
+
+[Languages.en.params.quickStart]
+link = '/en/docs'
+
+# features
+
+[[Languages.en.params.feature]]
+description = "Support application interactive update, delete the replica only after the application confirmed"
+icon = "/images/customer/canary_release.png"
+link = '#'
+title = "Application Interactive Update"
+
+[[Languages.en.params.feature]]
+description = "Support in-place update image, and the Pod will not be recreated. The local cache data GameServer can be retained when updating"
+icon = "/images/customer/inplace_update.png"
+link = '#'
+title = "In-place Update"
+
+[[Languages.en.params.feature]]
+description = "Support multiple modes (resource indicators/custom indicators/timing/events/webhook) Pod scaling strategies"
+icon = "/images/customer/gpa.png"
+link = '#'
+title = "General Pod Auto-scaling"
+
+[[Languages.en.params.feature]]
+description = "Application can define the scaling-down order of replicas, application can choose replica with least user-accessed to delete"
+icon = "/images/customer/scaling_down_order.png"
+link = '#'
+title = "Application-defined Scaling-down Order"
+
+[[Languages.en.params.feature]]
+description = "It can be seamlessly integrated with the cluster auto-scaling. Can choose any replica to delete after application confirmed when cluster scaling-down"
+icon = "/images/customer/cluster_autoscaler.png"
+link = '#'
+title = "Better Cluster Auto-scaling"
+
+[[Languages.en.params.feature]]
+description = "All components are built on K8s, completely free and open source, and can run on any K8s cluster"
+icon = "/images/customer/opensource.png"
+link = '#'
+title = "Opensource"

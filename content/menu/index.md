@@ -2,21 +2,18 @@
 headless: true
 ---
 
-- [**Example Site**]({{< relref "/docs/example" >}})
-- [Table of Contents]({{< relref "/docs/example/table-of-contents" >}})
-  - [With ToC]({{< relref "/docs/example/table-of-contents/with-toc" >}})
-  - [Without ToC]({{< relref "/docs/example/table-of-contents/without-toc" >}})
-- [Collapsed]({{< relref "/docs/example/collapsed" >}})
-  - [3rd]({{< relref "/docs/example/collapsed/3rd-level" >}})
-    - [4th]({{< relref "/docs/example/collapsed/3rd-level/4th-level" >}})
-<br />
-
-- **Shortcodes**
-- [Buttons]({{< relref "/docs/shortcodes/buttons" >}})
-- [Columns]({{< relref "/docs/shortcodes/columns" >}})
-- [Expand]({{< relref "/docs/shortcodes/expand" >}})
-- [Hints]({{< relref "/docs/shortcodes/hints" >}})
-- [Katex]({{< relref "/docs/shortcodes/katex" >}})
-- [Mermaid]({{< relref "/docs/shortcodes/mermaid" >}})
-- [Tabs]({{< relref "/docs/shortcodes/tabs" >}})
-<br />
+- [Documentations]({{< relref "/docs/" >}})
+  - [Overview]({{< relref "/" >}})
+  - [Installation]({{< relref "/docs/installation" >}})
+  - [Getting Started]({{< relref "/docs/getting-started" >}})
+    - [Create a GameServer]({{< relref "/docs/getting-started/gameserver" >}})
+    - [Create a Squad]({{< relref "/docs/getting-started/squad" >}})
+    - [Create a GeneralPodAutoScaler]({{< relref "/docs/getting-started/gpa" >}})
+    - [Create a GameServer with CLB]({{< relref "/docs/getting-started/clb" >}})
+    - [How A ClusterAutoscaler work]({{< relref "/docs/getting-started/ca" >}})
+  - [Guides]({{< relref "/docs/guides" >}})
+  - [Reference]({{< relref "/docs/reference" >}})
+    - [GameServer Network]({{< relref "/docs/reference/network.md" >}})
+  - [Examples]({{< relref "/docs/examples" >}})
+  - [Carrier SDK]({{< relref "/docs/sdk" >}})
+  - [FAQ]({{< relref "/docs/faq" >}})

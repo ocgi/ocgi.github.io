@@ -1,0 +1,51 @@
+{{ define "main" }}
+
+{{ "<!-- topics -->" | safeHTML }}
+<section class="section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 text-center">
+        <h2 class="section-title">{{ i18n "topics_title" | safeHTML }}</h2>
+      </div>
+      {{ "<!-- topic-item -->" | safeHTML }}
+      {{ range .Site.Params.feature }}
+      <div class="col-lg-4 col-sm-6 mb-4">
+        <div class="px-4 py-5 bg-white shadow text-center d-block match-height">
+          {{/* {{ with .icon}}<i class="{{.}} icon text-primary d-block mb-4"></i>{{end}} */}}
+          {{ with .icon}}
+          <div class="feature-icon icon text-primary d-block mb-4"><img src="{{.}}" /></div>{{end}}
+          <h3 class="mb-3 mt-0">{{ .title }}</h3>
+          {{with .description}}
+          <p class="mb-0">{{. | markdownify}}</p>{{end}}
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ "<!-- /topics -->" | safeHTML }}
+
+{{ if .Site.Params.whoUse.enable }}
+{{ with .Site.Params.whoUse }}
+{{ "<!-- call to action -->" | safeHTML }}
+<section>
+  <div class="container">
+    <h2 class="text-center mb-4">{{ i18n "who_use_title" | safeHTML }}</h2>
+    <div class="row">
+      <div class="col-12">
+        <div class="section px-3 bg-white shadow text-center">
+          <div class="row">
+            {{ range .customer }}
+            <div class="col-2"><img class="w-50" src="{{ .icon }}"></div>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{{ "<!-- /call to action -->" | safeHTML }}
+{{ end }}
+{{ end }}
+
+{{ end }}
