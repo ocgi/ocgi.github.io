@@ -60,8 +60,6 @@ spec:
       labels:
         foo: bar
     spec:
-      health:
-        disabled: true
       ports:
         - container: simple-tcp
           containerPort: 7654

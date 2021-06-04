@@ -160,8 +160,6 @@ metadata:
   name: ds-server
   namespace: default
 spec:
-  health:
-    disabled: true # 不检查GameServer的健康状况。
   readinessGates:
     - server-ready # readiness gate name should be same as the readiness gate name in webhook
 ```

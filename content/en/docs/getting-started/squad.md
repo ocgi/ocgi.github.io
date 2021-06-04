@@ -30,8 +30,6 @@ spec:
       labels:
         foo: bar
     spec:
-      health:
-        disabled: true
       ports:
       - container: server
         containerPort: 7654

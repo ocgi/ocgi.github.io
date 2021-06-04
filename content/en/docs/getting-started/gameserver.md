@@ -18,8 +18,6 @@ spec:
   - name: default
     containerPort: 7654
     protocol: TCP
-  health:
-    disabled: true
   template:
     spec:
       containers:

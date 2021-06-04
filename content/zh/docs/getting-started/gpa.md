@@ -28,8 +28,6 @@ spec:
       labels:
         foo: squad-example
     spec:
-      health:
-        disabled: true
       ports:
       - container: simple-udp
         containerPort: 7654
