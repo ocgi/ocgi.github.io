@@ -1,0 +1,117 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><title>Create a GameServer</title><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta name=generator content="Hugo 0.83.1"><link rel=stylesheet href=https://ocgi.github.io/plugins/bootstrap/bootstrap.min.css><link rel=stylesheet href=https://ocgi.github.io/plugins/themify-icons/themify-icons.css><link rel=icon href=https://ocgi.github.io/images/favicon.png type=image/x-icon><link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel=stylesheet><style>:root{--primary-color:#0052d9;--body-color:#f9f9f9;--text-color:#636363;--text-color-dark:#242738;--white-color:#ffffff;--light-color:#f8f9fa;--font-family:Lato}</style><link href=https://ocgi.github.io/css/style.min.css rel=stylesheet media=screen><script src=https://ocgi.github.io/plugins/jquery/jquery-1.12.4.js></script><script src=https://ocgi.github.io/plugins/jquery/jquery-ui.js></script><script src=https://ocgi.github.io/plugins/bootstrap/bootstrap.min.js></script><script src=https://ocgi.github.io/plugins/match-height/jquery.matchHeight-min.js></script></head><body><header class="shadow-bottom sticky-top bg-white"><nav class="navbar navbar-expand-md navbar-light"><div class=container><a class="navbar-brand px-2" href=/>OCGI</a>
+<button class="navbar-toggler border-0" type=button data-toggle=collapse data-target=#navigation aria-controls=navigation aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse text-center" id=navigation><ul class="navbar-nav ml-auto"><li class=nav-item><a class="nav-link text-dark" href=https://ocgi.github.io/en/docs/>Docs</a></li><li class=nav-item><a class="nav-link text-dark" href=https://github.com/ocgi>Github</a></li></ul><select class="lang-list dark" id=select-language onchange="location=this.value"><option id=en value=https://ocgi.github.io/en/docs/getting-started/gameserver/ selected>En</option></select></div></div></nav></header><section class="single section-sm pb-0"><div class=container><div class=row><div class=col-lg-3><div class=sidebar><ul class=list-styled><a class=back-btn href=/></a><li data-nav-id=https://ocgi.github.io/en/ title=Ens class=sidelist><a href=https://ocgi.github.io/en/>Ens</a><ul><li data-nav-id=https://ocgi.github.io/en/docs/ title="OCGI Documentation" class=sidelist><a href=https://ocgi.github.io/en/docs/>OCGI Documentation</a><ul><li data-nav-id=https://ocgi.github.io/en/docs/overview/ title=Overview class=sidelist><a href=https://ocgi.github.io/en/docs/overview/>Overview</a></li><li data-nav-id=https://ocgi.github.io/en/docs/installation/ title=Installation class=sidelist><a href=https://ocgi.github.io/en/docs/installation/>Installation</a></li><li data-nav-id=https://ocgi.github.io/en/docs/getting-started/ title="Getting Started" class=sidelist><a href=https://ocgi.github.io/en/docs/getting-started/>Getting Started</a><ul><li data-nav-id=https://ocgi.github.io/en/docs/getting-started/gameserver/ title="Create a GameServer" class="sidelist
+active"><a href=https://ocgi.github.io/en/docs/getting-started/gameserver/>Create a GameServer</a></li><li data-nav-id=https://ocgi.github.io/en/docs/getting-started/squad/ title="Create a Squad" class=sidelist><a href=https://ocgi.github.io/en/docs/getting-started/squad/>Create a Squad</a></li><li data-nav-id=https://ocgi.github.io/en/docs/getting-started/gpa/ title="Create a GeneralPodAutoscaler" class=sidelist><a href=https://ocgi.github.io/en/docs/getting-started/gpa/>Create a GeneralPodAutoscaler</a></li></ul></li><li data-nav-id=https://ocgi.github.io/en/docs/guides/ title=Guides class=sidelist><a href=https://ocgi.github.io/en/docs/guides/>Guides</a><ul><li data-nav-id=https://ocgi.github.io/en/docs/guides/squad_details/ title="Squad Introduction" class=sidelist><a href=https://ocgi.github.io/en/docs/guides/squad_details/>Squad Introduction</a></li><li data-nav-id=https://ocgi.github.io/en/docs/guides/gpa/ title="GeneralPodAutoscaler Introduction" class=sidelist><a href=https://ocgi.github.io/en/docs/guides/gpa/>GeneralPodAutoscaler Introduction</a></li><li data-nav-id=https://ocgi.github.io/en/docs/guides/autoscaling_flow/ title="GameServer autoscaling workflow" class=sidelist><a href=https://ocgi.github.io/en/docs/guides/autoscaling_flow/>GameServer autoscaling workflow</a></li><li data-nav-id=https://ocgi.github.io/en/docs/guides/squad-scaledown-priority/ title="GamerServer scaling down priority" class=sidelist><a href=https://ocgi.github.io/en/docs/guides/squad-scaledown-priority/>GamerServer scaling down priority</a></li></ul></li><li data-nav-id=https://ocgi.github.io/en/docs/reference/ title=Reference class=sidelist><a href=https://ocgi.github.io/en/docs/reference/>Reference</a><ul><li data-nav-id=https://ocgi.github.io/en/docs/reference/sdk/ title="Carrier SDK" class=sidelist><a href=https://ocgi.github.io/en/docs/reference/sdk/>Carrier SDK</a></li><li data-nav-id=https://ocgi.github.io/en/docs/reference/gpa_webhook/ title="GPA Webhook example" class=sidelist><a href=https://ocgi.github.io/en/docs/reference/gpa_webhook/>GPA Webhook example</a></li></ul></li><li data-nav-id=https://ocgi.github.io/en/docs/examples/ title=Examples class=sidelist><a href=https://ocgi.github.io/en/docs/examples/>Examples</a></li><li data-nav-id=https://ocgi.github.io/en/docs/faq/ title="Frequently Asked Questions" class=sidelist><a href=https://ocgi.github.io/en/docs/faq/>Frequently Asked Questions</a></li></ul></li></ul></li></ul></div></div><div class=col-lg-9><div class="p-lg-5 p-4 bg-white"><h1 class=mb-5>Create a GameServer</h1><div class=content><p><code>GameServer</code> represents a single game server. It is based on <a href=https://kubernetes.io/docs/concepts/workloads/pods/><code>K8s Pod</code></a> implementation and is a further abstraction of K8s Pod.</p><h2 id=create-a-gameserver>Create a GameServer</h2><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>cat <span style=color:#e6db74>&lt;&lt;EOF | kubectl apply -f -
+</span><span style=color:#e6db74>apiVersion: &#34;carrier.ocgi.dev/v1alpha1&#34;
+</span><span style=color:#e6db74>kind: GameServer
+</span><span style=color:#e6db74>metadata:
+</span><span style=color:#e6db74>  name: &#34;simple-tcp-example&#34;
+</span><span style=color:#e6db74>spec:
+</span><span style=color:#e6db74>  ports:
+</span><span style=color:#e6db74>  - name: default
+</span><span style=color:#e6db74>    containerPort: 7654
+</span><span style=color:#e6db74>    protocol: TCP
+</span><span style=color:#e6db74>  template:
+</span><span style=color:#e6db74>    spec:
+</span><span style=color:#e6db74>      containers:
+</span><span style=color:#e6db74>      - name: server
+</span><span style=color:#e6db74>        image: ocgi/simple-tcp:0.1
+</span><span style=color:#e6db74>        resources:
+</span><span style=color:#e6db74>          requests:
+</span><span style=color:#e6db74>            memory: &#34;32Mi&#34;
+</span><span style=color:#e6db74>            cpu: &#34;20m&#34;
+</span><span style=color:#e6db74>          limits:
+</span><span style=color:#e6db74>            memory: &#34;32Mi&#34;
+</span><span style=color:#e6db74>            cpu: &#34;20m&#34;
+</span><span style=color:#e6db74>      serviceAccount: carrier-sdk
+</span><span style=color:#e6db74>      serviceAccountName: carrier-sdk
+</span><span style=color:#e6db74>EOF</span>
+</code></pre></div><h2 id=fetch-the-gameserver-status>Fetch the GameServer Status</h2><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#75715e># kubectl get gs  </span>
+NAME                      STATE     ADDRESS         PORT   EXTERNALIP   PORTRANGE   NODE            AGE
+simple-tcp-example        Running   172.16.5.3                                      172.16.18.47    16s
+
+<span style=color:#75715e># kubectl get pods</span>
+NAME                           READY   STATUS              RESTARTS   AGE
+simple-tcp-example             2/2     Running             <span style=color:#ae81ff>0</span>          48s
+</code></pre></div><p>Each field of output represents:</p><ul><li>STATE describes the state of GameServer, including the following states<ul><li>Starting: means the pod phase of GameServer is Pending or pod not existing</li><li>Running: means the pod phase of GameServer is Running</li><li>Exited: means GameServer has exited</li><li>Failed: means the pod phase of GameServer is Failed</li><li>Unknown: means the pod phase of GameServer is Unkown</li><li>ADDRESS corresponds to the ip of the Pod</li></ul></li><li>PORT The port used by the application to provide services</li><li>EXTERNALIP provides access IP, such as LB address</li><li>PORTRANGE The port range where the application provides services</li><li>Node node to which the application belongs</li><li>AGE shows the running time of the application</li><li>LABELS The label of the application. The label prefixed with <code>carrier.ocgi.dev</code> is created by the system by default</li></ul><p>Details of GameServer:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#75715e># kubectl describe gs/simple-tcp-example</span>
+Name:         simple-tcp-example
+Namespace:    default
+Labels:       &lt;none&gt;
+Annotations:  carrier.ocgi.dev/container: docker://6ff5c9538916b7356347662a1b8c7818f42ddfbd663c4838f8d8ddea8aa51e01
+              kubectl.kubernetes.io/last-applied-configuration:
+                <span style=color:#f92672>{</span><span style=color:#e6db74>&#34;apiVersion&#34;</span>:<span style=color:#e6db74>&#34;carrier.ocgi.dev/v1alpha1&#34;</span>,<span style=color:#e6db74>&#34;kind&#34;</span>:<span style=color:#e6db74>&#34;GameServer&#34;</span>,<span style=color:#e6db74>&#34;metadata&#34;</span>:<span style=color:#f92672>{</span><span style=color:#e6db74>&#34;annotations&#34;</span>:<span style=color:#f92672>{}</span>,<span style=color:#e6db74>&#34;name&#34;</span>:<span style=color:#e6db74>&#34;simple-tcp-example&#34;</span>,<span style=color:#e6db74>&#34;namespace&#34;</span>:<span style=color:#e6db74>&#34;defaul...
+</span><span style=color:#e6db74>API Version:  carrier.ocgi.dev/v1alpha1
+</span><span style=color:#e6db74>Kind:         GameServer
+</span><span style=color:#e6db74>Metadata:
+</span><span style=color:#e6db74>  Creation Timestamp:  2021-05-17T07:05:24Z
+</span><span style=color:#e6db74>  Generation:          2
+</span><span style=color:#e6db74>  Resource Version:    341523019
+</span><span style=color:#e6db74>  Self Link:           /apis/carrier.ocgi.dev/v1alpha1/namespaces/default/gameservers/simple-tcp-example
+</span><span style=color:#e6db74>  UID:                 40821b17-b6de-11eb-8908-525400034523
+</span><span style=color:#e6db74>Spec:
+</span><span style=color:#e6db74>  Health:
+</span><span style=color:#e6db74>    Disabled:  true
+</span><span style=color:#e6db74>  Ports:
+</span><span style=color:#e6db74>    Container Port:  7654
+</span><span style=color:#e6db74>    Name:            default
+</span><span style=color:#e6db74>    Protocol:        TCP
+</span><span style=color:#e6db74>  Sdk Server:
+</span><span style=color:#e6db74>  Template:
+</span><span style=color:#e6db74>    Metadata:
+</span><span style=color:#e6db74>      Creation Timestamp:  &lt;nil&gt;
+</span><span style=color:#e6db74>    Spec:
+</span><span style=color:#e6db74>      Containers:
+</span><span style=color:#e6db74>        Image:  ocgi/simple-tcp:0.1
+</span><span style=color:#e6db74>        Name:   server
+</span><span style=color:#e6db74>        Resources:
+</span><span style=color:#e6db74>          Limits:
+</span><span style=color:#e6db74>            Cpu:     20m
+</span><span style=color:#e6db74>            Memory:  32Mi
+</span><span style=color:#e6db74>          Requests:
+</span><span style=color:#e6db74>            Cpu:             20m
+</span><span style=color:#e6db74>            Memory:          32Mi
+</span><span style=color:#e6db74>      Service Account:       carrier-sdk
+</span><span style=color:#e6db74>      Service Account Name:  carrier-sdk
+</span><span style=color:#e6db74>Status:
+</span><span style=color:#e6db74>  Address:  172.16.5.3
+</span><span style=color:#e6db74>  Conditions:
+</span><span style=color:#e6db74>    Last Probe Time:       2021-05-17T07:05:36Z
+</span><span style=color:#e6db74>    Last Transition Time:  2021-05-17T07:05:36Z
+</span><span style=color:#e6db74>    Status:                True
+</span><span style=color:#e6db74>    Type:                  carrier.dev/ready
+</span><span style=color:#e6db74>  Node Name:               172.16.18.47
+</span><span style=color:#e6db74>  State:                   Running
+</span><span style=color:#e6db74>Events:
+</span><span style=color:#e6db74>  Type    Reason    Age                From                   Message
+</span><span style=color:#e6db74>  ----    ------    ----               ----                   -------
+</span><span style=color:#e6db74>  Normal            80s                gameserver-controller  Creating pod simple-tcp-example
+</span><span style=color:#e6db74>  Normal  Starting  80s                gameserver-controller  Pod simple-tcp-example controlled by GameServer created
+</span><span style=color:#e6db74>  Normal  Running   68s                gameserver-controller  Address and port populated
+</span><span style=color:#e6db74>  Normal  Running   68s (x3 over 68s)  gameserver-controller  Waiting for receiving ready message
+</span><span style=color:#e6db74>  Normal  Running   68s                carrier-sdkserver      Condition changed: carrier.dev/ready to True
+</span></code></pre></div><p>The <code>GameServer.Address</code> is the IP address of the <code>GameServer</code> container.</p><h2 id=access-the-gameserver>Access the GameServer</h2><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#75715e># telnet 172.16.5.3 7654</span>
+Trying 172.16.5.3...
+Connected to 172.16.5.3.
+Escape character is <span style=color:#e6db74>&#39;^]&#39;</span>.
+FILLED TRUE
+ACK: FILLED
+...
+</code></pre></div><p>The <code>GameServer</code> condition will be changed:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#75715e># kubectl get gs/simple-tcp-example -o yaml</span>
+apiVersion: carrier.ocgi.dev/v1alpha1
+kind: GameServer
+...
+status:
+  address: 172.16.5.3
+  conditions:
+  - lastProbeTime: <span style=color:#e6db74>&#34;2021-05-17T07:07:37Z&#34;</span>
+    lastTransitionTime: <span style=color:#e6db74>&#34;2021-05-17T07:07:37Z&#34;</span>
+    status: <span style=color:#e6db74>&#34;True&#34;</span>
+    type: carrier.dev/filled
+  - lastProbeTime: <span style=color:#e6db74>&#34;2021-05-17T07:07:46Z&#34;</span>
+    lastTransitionTime: <span style=color:#e6db74>&#34;2021-05-17T07:05:36Z&#34;</span>
+    status: <span style=color:#e6db74>&#34;True&#34;</span>
+    type: carrier.dev/ready
+  nodeName: 172.16.18.47
+  state: Running
+</code></pre></div><h2 id=reference>Reference</h2><p>For more information, please refer to the <a href=https://github.com/ocgi/sdk-examples/tree/master/simple-tcp>Simple TCP Server</a>.</p></div><p class="post-meta border-bottom pb-3 mb-0 mt-3">Updated on 2021-06-04</p></p><nav class="pagination mt-3"><a class="nav nav-prev" href=https://ocgi.github.io/en/docs/getting-started/><i class="ti-arrow-left mr-2"></i> <span class="d-none d-md-block">Getting Started</span></a>
+<a class="nav nav-next" href=https://ocgi.github.io/en/docs/getting-started/squad/><span class="d-none d-md-block">Create a Squad</span><i class="ti-arrow-right ml-2"></i></a></nav></div></div></div></div></section><footer class="section pb-4"><div class=container><div class="row align-items-center"><div class="col-md-8 text-md-left text-center"><p class="mb-md-0 mb-4">Copyright © 2021 The OCGI Authors</p></div><div class="col-md-4 text-md-right text-center"><ul class=list-inline></ul></div></div></div></footer><script src=https://ocgi.github.io/js/script.min.js></script></body></html>

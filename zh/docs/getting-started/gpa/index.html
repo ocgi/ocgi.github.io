@@ -1,0 +1,209 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><title>Create a GeneralPodAutoscaler</title><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta name=generator content="Hugo 0.83.1"><link rel=stylesheet href=https://ocgi.github.io/plugins/bootstrap/bootstrap.min.css><link rel=stylesheet href=https://ocgi.github.io/plugins/themify-icons/themify-icons.css><link rel=icon href=https://ocgi.github.io/images/favicon.png type=image/x-icon><link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel=stylesheet><style>:root{--primary-color:#0052d9;--body-color:#f9f9f9;--text-color:#636363;--text-color-dark:#242738;--white-color:#ffffff;--light-color:#f8f9fa;--font-family:Lato}</style><link href=https://ocgi.github.io/css/style.min.css rel=stylesheet media=screen><script src=https://ocgi.github.io/plugins/jquery/jquery-1.12.4.js></script><script src=https://ocgi.github.io/plugins/jquery/jquery-ui.js></script><script src=https://ocgi.github.io/plugins/bootstrap/bootstrap.min.js></script><script src=https://ocgi.github.io/plugins/match-height/jquery.matchHeight-min.js></script></head><body><header class="shadow-bottom sticky-top bg-white"><nav class="navbar navbar-expand-md navbar-light"><div class=container><a class="navbar-brand px-2" href=/>OCGI</a>
+<button class="navbar-toggler border-0" type=button data-toggle=collapse data-target=#navigation aria-controls=navigation aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse text-center" id=navigation><ul class="navbar-nav ml-auto"><li class=nav-item><a class="nav-link text-dark" href=https://ocgi.github.io/en/docs/>Docs</a></li><li class=nav-item><a class="nav-link text-dark" href=https://github.com/ocgi>Github</a></li></ul><select class="lang-list dark" id=select-language onchange="location=this.value"><option id=en value=https://ocgi.github.io/zh/docs/getting-started/gpa/ selected>En</option></select></div></div></nav></header><section class="single section-sm pb-0"><div class=container><div class=row><div class=col-lg-3><div class=sidebar><ul class=list-styled><a class=back-btn href=/></a><li data-nav-id=https://ocgi.github.io/zh/ title=Zhs class=sidelist><a href=https://ocgi.github.io/zh/>Zhs</a><ul><li data-nav-id=https://ocgi.github.io/zh/docs/ title="OCGI Documentation" class=sidelist><a href=https://ocgi.github.io/zh/docs/>OCGI Documentation</a><ul><li data-nav-id=https://ocgi.github.io/zh/docs/overview/ title=Overview class=sidelist><a href=https://ocgi.github.io/zh/docs/overview/>Overview</a></li><li data-nav-id=https://ocgi.github.io/zh/docs/installation/ title=Installation class=sidelist><a href=https://ocgi.github.io/zh/docs/installation/>Installation</a></li><li data-nav-id=https://ocgi.github.io/zh/docs/getting-started/ title="Getting Started" class=sidelist><a href=https://ocgi.github.io/zh/docs/getting-started/>Getting Started</a><ul><li data-nav-id=https://ocgi.github.io/zh/docs/getting-started/gameserver/ title=创建GameServer class=sidelist><a href=https://ocgi.github.io/zh/docs/getting-started/gameserver/>创建GameServer</a></li><li data-nav-id=https://ocgi.github.io/zh/docs/getting-started/squad/ title=创建Squad class=sidelist><a href=https://ocgi.github.io/zh/docs/getting-started/squad/>创建Squad</a></li><li data-nav-id=https://ocgi.github.io/zh/docs/getting-started/gpa/ title="Create a GeneralPodAutoscaler" class="sidelist
+active"><a href=https://ocgi.github.io/zh/docs/getting-started/gpa/>Create a GeneralPodAutoscaler</a></li></ul></li><li data-nav-id=https://ocgi.github.io/zh/docs/guides/ title=Guides class=sidelist><a href=https://ocgi.github.io/zh/docs/guides/>Guides</a><ul><li data-nav-id=https://ocgi.github.io/zh/docs/guides/squad_details/ title=Squad介绍 class=sidelist><a href=https://ocgi.github.io/zh/docs/guides/squad_details/>Squad介绍</a></li><li data-nav-id=https://ocgi.github.io/zh/docs/guides/gpa/ title=GeneralPodAutoscaler介绍 class=sidelist><a href=https://ocgi.github.io/zh/docs/guides/gpa/>GeneralPodAutoscaler介绍</a></li><li data-nav-id=https://ocgi.github.io/zh/docs/guides/autoscaling_flow/ title=GameServer自动伸缩流程 class=sidelist><a href=https://ocgi.github.io/zh/docs/guides/autoscaling_flow/>GameServer自动伸缩流程</a></li><li data-nav-id=https://ocgi.github.io/zh/docs/guides/squad-scaledown-priority/ title=设置GamerServer缩容的优先级 class=sidelist><a href=https://ocgi.github.io/zh/docs/guides/squad-scaledown-priority/>设置GamerServer缩容的优先级</a></li></ul></li><li data-nav-id=https://ocgi.github.io/zh/docs/reference/ title=Reference class=sidelist><a href=https://ocgi.github.io/zh/docs/reference/>Reference</a><ul><li data-nav-id=https://ocgi.github.io/zh/docs/reference/sdk/ title="Carrier SDK" class=sidelist><a href=https://ocgi.github.io/zh/docs/reference/sdk/>Carrier SDK</a></li><li data-nav-id=https://ocgi.github.io/zh/docs/reference/gpa_webhook/ title="GPA Webhook示例" class=sidelist><a href=https://ocgi.github.io/zh/docs/reference/gpa_webhook/>GPA Webhook示例</a></li></ul></li><li data-nav-id=https://ocgi.github.io/zh/docs/examples/ title=Examples class=sidelist><a href=https://ocgi.github.io/zh/docs/examples/>Examples</a></li><li data-nav-id=https://ocgi.github.io/zh/docs/faq/ title="Frequently Asked Questions" class=sidelist><a href=https://ocgi.github.io/zh/docs/faq/>Frequently Asked Questions</a></li></ul></li></ul></li></ul></div></div><div class=col-lg-9><div class="p-lg-5 p-4 bg-white"><h1 class=mb-5>Create a GeneralPodAutoscaler</h1><div class=content><p><code>GeneralPodAutoscaler(GPA)</code>完全兼容<a href=https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/>K8s HPA</a>的功能。同时，GPA支持Crontab、Webhook等方式。</p><h2 id=前置条件>前置条件</h2><p>创建一个如下的squad</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#75715e># cat &lt;&lt;EOF | kubectl apply -f -</span>
+apiVersion: carrier.ocgi.dev/v1alpha1
+kind: Squad
+metadata:
+  name: squad-example
+  namespace: default
+spec:
+  replicas: <span style=color:#ae81ff>2</span>
+  strategy:
+    rollingUpdate:
+      maxSurge: <span style=color:#ae81ff>1</span>
+      maxUnavailable: <span style=color:#ae81ff>1</span>
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        foo: squad-example
+    spec:
+      ports:
+      - container: simple-udp
+        containerPort: <span style=color:#ae81ff>7654</span>
+        hostPort: <span style=color:#ae81ff>7777</span>
+        name: default
+        portPolicy: Static
+        protocol: UDP
+      sdkServer:
+        grpcPort: <span style=color:#ae81ff>9020</span>
+        httpPort: <span style=color:#ae81ff>9021</span>
+        logLevel: Info
+      template:
+        spec:
+          containers:
+          - image: ocgi/simple-tcp:0.1
+            imagePullPolicy: Always
+            name: server
+          serviceAccount: carrier-sdk
+          serviceAccountName: carrier-sdk
+EOF
+</code></pre></div><h2 id=定时扩缩模式>定时扩缩模式</h2><p>基于Crontab语法，支持多时间段</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#75715e># cat &lt;&lt;EOF | kubectl apply -f -</span>
+apiVersion: autoscaling.ocgi.dev/v1alpha1
+kind: GeneralPodAutoscaler
+metadata:
+  name: pa-test1
+spec:
+  maxReplicas: <span style=color:#ae81ff>8</span>
+  minReplicas: <span style=color:#ae81ff>2</span>
+  scaleTargetRef:
+    apiVersion: carrier.ocgi.dev/v1alpha1
+    kind: Squad
+    name: squad-example
+  time:
+    ranges:
+    - desiredReplicas: <span style=color:#ae81ff>4</span>
+      schedule: <span style=color:#e6db74>&#39;*/1 2-3 * * *&#39;</span>
+    - desiredReplicas: <span style=color:#ae81ff>6</span>
+      schedule: <span style=color:#e6db74>&#39;*/1 4-5 * * *&#39;</span>
+EOF
+
+<span style=color:#75715e># kubectl get pa pa-squad</span>
+NAME       MINREPLICAS   MAXREPLICAS   DESIRED   CURRENT   TARGETKIND   TARGETNAME
+pa-squad   <span style=color:#ae81ff>1</span>             <span style=color:#ae81ff>8</span>             <span style=color:#ae81ff>4</span>         <span style=color:#ae81ff>4</span>         Squad        squad-example
+<span style=color:#75715e># date</span>
+Wed Nov <span style=color:#ae81ff>25</span> 11:58:28 CST <span style=color:#ae81ff>2020</span>
+</code></pre></div><h2 id=webhook>Webhook</h2><p>webhook模式，支持业务自定义开发一个webhook，来定义何时伸缩，以下是一个例子：</p><p>保证有2个可用的空闲GameServer</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#75715e># cat &lt;&lt;EOF | kubectl apply -f -</span>
+apiVersion: autoscaling.ocgi.dev/v1alpha1
+kind: GeneralPodAutoscaler
+metadata:
+  name: pa-squad
+  namespace: default
+spec:
+  maxReplicas: <span style=color:#ae81ff>8</span>
+  minReplicas: <span style=color:#ae81ff>1</span>
+  scaleTargetRef:
+    apiVersion: carrier.ocgi.dev/v1alpha1
+    kind: Squad
+    name: squad-example
+  webhook:
+    parameters:
+      buffer: <span style=color:#e6db74>&#34;2&#34;</span>
+    service:
+      name: gpa-webhook
+      namespace: kube-system
+      path: scale
+      port: <span style=color:#ae81ff>8000</span>
+EOF
+
+<span style=color:#75715e># kubectl get pa pa-squad</span>
+NAME       MINREPLICAS   MAXREPLICAS   DESIRED   CURRENT   TARGETKIND   TARGETNAME
+pa-squad   <span style=color:#ae81ff>1</span>             <span style=color:#ae81ff>8</span>             <span style=color:#ae81ff>2</span>         <span style=color:#ae81ff>4</span>         Squad        squad-example
+</code></pre></div><h2 id=mix-webhook-and-crontab>Mix webhook and crontab</h2><p>混合多种模式进行自动伸缩</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#75715e># cat &lt;&lt;EOF | kubectl apply -f -</span>
+apiVersion: autoscaling.ocgi.dev/v1alpha1
+kind: GeneralPodAutoscaler
+metadata:
+  name: pa-squad
+  namespace: default
+spec:
+  maxReplicas: <span style=color:#ae81ff>8</span>
+  minReplicas: <span style=color:#ae81ff>1</span>
+  scaleTargetRef:
+    apiVersion: carrier.ocgi.dev/v1alpha1
+    kind: Squad
+    name: squad-example
+  time:
+    ranges:
+    - desiredReplicas: <span style=color:#ae81ff>4</span>
+      schedule: <span style=color:#e6db74>&#39;*/1 10-23 * * *&#39;</span>
+  webhook:
+    parameters:
+      buffer: <span style=color:#e6db74>&#34;2&#34;</span>
+    service:
+      name: gpa-webhook
+      namespace: kube-system
+      path: scale
+      port: <span style=color:#ae81ff>8000</span>
+EOF
+
+<span style=color:#75715e># kubectl get pa pa-squad</span>
+NAME       MINREPLICAS   MAXREPLICAS   DESIRED   CURRENT   TARGETKIND   TARGETNAME
+pa-squad   <span style=color:#ae81ff>1</span>             <span style=color:#ae81ff>8</span>             <span style=color:#ae81ff>2</span>         <span style=color:#ae81ff>4</span>         Squad        squad-example
+</code></pre></div><h2 id=metric>Metric</h2><p>通过metric的方式弹性伸缩</p><h3 id=in-tree-metrics>In-tree metrics</h3><p>内置的指标包括： cpu、memory</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#75715e># cat &lt;&lt;EOF | kubectl apply -f -</span>
+apiVersion: autoscaling.ocgi.dev/v1alpha1
+kind: GeneralPodAutoscaler
+metadata:
+  name: pa-squad-metric
+spec:
+  maxReplicas: <span style=color:#ae81ff>10</span>
+  minReplicas: <span style=color:#ae81ff>2</span>
+  metric:
+    metrics:
+    - resource:
+        name: cpu
+        target:
+          averageValue: <span style=color:#ae81ff>20</span>
+          type: AverageValue
+      type: Resource
+    - resource:
+        name: memory
+        target:
+          averageValue: 50m
+          type: AverageValue
+      type: Resource
+  scaleTargetRef:
+    apiVersion: carrier.ocgi.dev/v1alpha1
+    kind: Squad
+    name: squad-example1
+EOF
+
+<span style=color:#75715e># kubectl get pa pa-squad-metric</span>
+NAME              MINREPLICAS   MAXREPLICAS   DESIRED   CURRENT   TARGETKIND   TARGETNAME
+pa-squad-metric   <span style=color:#ae81ff>2</span>             <span style=color:#ae81ff>10</span>            <span style=color:#ae81ff>4</span>         <span style=color:#ae81ff>2</span>         Squad        squad-example1
+
+<span style=color:#75715e># kubectl get pa pa-squad-metric</span>
+NAME              MINREPLICAS   MAXREPLICAS   DESIRED   CURRENT   TARGETKIND   TARGETNAME
+pa-squad-metric   <span style=color:#ae81ff>2</span>             <span style=color:#ae81ff>10</span>            <span style=color:#ae81ff>4</span>         <span style=color:#ae81ff>8</span>         Squad        squad-example1
+
+<span style=color:#75715e># kubectl top pod</span>
+NAME                                     CPU<span style=color:#f92672>(</span>cores<span style=color:#f92672>)</span>   MEMORY<span style=color:#f92672>(</span>bytes<span style=color:#f92672>)</span>              
+squad-example1-8665fc7ff5-bdvcj          1m           9Mi             
+squad-example1-8665fc7ff5-x7znq          1m           10Mi            
+squad-example1-8665fc7ff5-xrkng          5m           10Mi            
+squad-example1-8665fc7ff5-xzntk          5m           10Mi            
+
+<span style=color:#75715e># kubectl get pa pa-squad-metric</span>
+NAME              MINREPLICAS   MAXREPLICAS   DESIRED   CURRENT   TARGETKIND   TARGETNAME
+pa-squad-metric   <span style=color:#ae81ff>2</span>             <span style=color:#ae81ff>10</span>            <span style=color:#ae81ff>10</span>        <span style=color:#ae81ff>10</span>        Squad        squad-example1
+
+<span style=color:#75715e># kubectl top pod</span>
+NAME                                     CPU<span style=color:#f92672>(</span>cores<span style=color:#f92672>)</span>   MEMORY<span style=color:#f92672>(</span>bytes<span style=color:#f92672>)</span>  
+squad-example1-8665fc7ff5-8h5rs          1m           10Mi            
+squad-example1-8665fc7ff5-bdvcj          1m           10Mi            
+squad-example1-8665fc7ff5-kf4tz          1m           10Mi            
+squad-example1-8665fc7ff5-kx5px          1m           10Mi            
+squad-example1-8665fc7ff5-ldcm7          1m           8Mi             
+squad-example1-8665fc7ff5-mknnk          1m           9Mi             
+squad-example1-8665fc7ff5-wdlrl          1m           10Mi            
+squad-example1-8665fc7ff5-x7znq          1m           10Mi            
+squad-example1-8665fc7ff5-xrkng          1m           10Mi            
+squad-example1-8665fc7ff5-xzntk          1m           10Mi  
+</code></pre></div><h3 id=custom-metric>custom metric</h3><p>自定义指标：我们提供了出cpu 内存之外的指标，可以使用网卡流量等，或者业务自定的一些指标</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#75715e># cat &lt;&lt;EOF | kubectl apply -f -</span>
+apiVersion: autoscaling.ocgi.dev/v1alpha1
+kind: GeneralPodAutoscaler
+metadata:
+  name: pa-squad-metric-custom
+spec:
+  maxReplicas: <span style=color:#ae81ff>10</span>
+  minReplicas: <span style=color:#ae81ff>2</span>
+  metric:
+    metrics:
+      - type: Pods
+        pods:
+          metric:
+            name: memory_rss
+          target:
+            averageValue: 10m
+            type: AverageValue
+  scaleTargetRef:
+    apiVersion: carrier.ocgi.dev/v1alpha1
+    kind: Squad
+    name: squad-example2
+EOF
+
+<span style=color:#75715e># kubectl get pa pa-squad-metric-custom</span>
+NAME                     MINREPLICAS   MAXREPLICAS   DESIRED   CURRENT   TARGETKIND   TARGETNAME
+pa-squad-metric-custom   <span style=color:#ae81ff>2</span>             <span style=color:#ae81ff>10</span>            <span style=color:#ae81ff>10</span>        <span style=color:#ae81ff>10</span>        Squad        squad-example2
+</code></pre></div><h2 id=reference>Reference</h2><p>关于GPA更多信息请参考<a href=/zh/docs/guides/gpa>GeneralPodAutoscaler介绍</a>.</p></div><p class="post-meta border-bottom pb-3 mb-0 mt-3">Updated on 2021-06-04</p></p><nav class="pagination mt-3"><a class="nav nav-prev" href=https://ocgi.github.io/zh/docs/getting-started/squad/><i class="ti-arrow-left mr-2"></i> <span class="d-none d-md-block">创建Squad</span></a>
+<a class="nav nav-next" href=https://ocgi.github.io/zh/docs/guides/><span class="d-none d-md-block">Guides</span><i class="ti-arrow-right ml-2"></i></a></nav></div></div></div></div></section><footer class="section pb-4"><div class=container><div class="row align-items-center"><div class="col-md-8 text-md-left text-center"><p class="mb-md-0 mb-4">Copyright © 2021 The OCGI Authors</p></div><div class="col-md-4 text-md-right text-center"><ul class=list-inline></ul></div></div></div></footer><script src=https://ocgi.github.io/js/script.min.js></script></body></html>

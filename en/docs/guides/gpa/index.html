@@ -1,0 +1,227 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><title>GeneralPodAutoscaler Introduction</title><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta name=generator content="Hugo 0.83.1"><link rel=stylesheet href=https://ocgi.github.io/plugins/bootstrap/bootstrap.min.css><link rel=stylesheet href=https://ocgi.github.io/plugins/themify-icons/themify-icons.css><link rel=icon href=https://ocgi.github.io/images/favicon.png type=image/x-icon><link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel=stylesheet><style>:root{--primary-color:#0052d9;--body-color:#f9f9f9;--text-color:#636363;--text-color-dark:#242738;--white-color:#ffffff;--light-color:#f8f9fa;--font-family:Lato}</style><link href=https://ocgi.github.io/css/style.min.css rel=stylesheet media=screen><script src=https://ocgi.github.io/plugins/jquery/jquery-1.12.4.js></script><script src=https://ocgi.github.io/plugins/jquery/jquery-ui.js></script><script src=https://ocgi.github.io/plugins/bootstrap/bootstrap.min.js></script><script src=https://ocgi.github.io/plugins/match-height/jquery.matchHeight-min.js></script></head><body><header class="shadow-bottom sticky-top bg-white"><nav class="navbar navbar-expand-md navbar-light"><div class=container><a class="navbar-brand px-2" href=/>OCGI</a>
+<button class="navbar-toggler border-0" type=button data-toggle=collapse data-target=#navigation aria-controls=navigation aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse text-center" id=navigation><ul class="navbar-nav ml-auto"><li class=nav-item><a class="nav-link text-dark" href=https://ocgi.github.io/en/docs/>Docs</a></li><li class=nav-item><a class="nav-link text-dark" href=https://github.com/ocgi>Github</a></li></ul><select class="lang-list dark" id=select-language onchange="location=this.value"><option id=en value=https://ocgi.github.io/en/docs/guides/gpa/ selected>En</option></select></div></div></nav></header><section class="single section-sm pb-0"><div class=container><div class=row><div class=col-lg-3><div class=sidebar><ul class=list-styled><a class=back-btn href=/></a><li data-nav-id=https://ocgi.github.io/en/ title=Ens class=sidelist><a href=https://ocgi.github.io/en/>Ens</a><ul><li data-nav-id=https://ocgi.github.io/en/docs/ title="OCGI Documentation" class=sidelist><a href=https://ocgi.github.io/en/docs/>OCGI Documentation</a><ul><li data-nav-id=https://ocgi.github.io/en/docs/overview/ title=Overview class=sidelist><a href=https://ocgi.github.io/en/docs/overview/>Overview</a></li><li data-nav-id=https://ocgi.github.io/en/docs/installation/ title=Installation class=sidelist><a href=https://ocgi.github.io/en/docs/installation/>Installation</a></li><li data-nav-id=https://ocgi.github.io/en/docs/getting-started/ title="Getting Started" class=sidelist><a href=https://ocgi.github.io/en/docs/getting-started/>Getting Started</a><ul><li data-nav-id=https://ocgi.github.io/en/docs/getting-started/gameserver/ title="Create a GameServer" class=sidelist><a href=https://ocgi.github.io/en/docs/getting-started/gameserver/>Create a GameServer</a></li><li data-nav-id=https://ocgi.github.io/en/docs/getting-started/squad/ title="Create a Squad" class=sidelist><a href=https://ocgi.github.io/en/docs/getting-started/squad/>Create a Squad</a></li><li data-nav-id=https://ocgi.github.io/en/docs/getting-started/gpa/ title="Create a GeneralPodAutoscaler" class=sidelist><a href=https://ocgi.github.io/en/docs/getting-started/gpa/>Create a GeneralPodAutoscaler</a></li></ul></li><li data-nav-id=https://ocgi.github.io/en/docs/guides/ title=Guides class=sidelist><a href=https://ocgi.github.io/en/docs/guides/>Guides</a><ul><li data-nav-id=https://ocgi.github.io/en/docs/guides/squad_details/ title="Squad Introduction" class=sidelist><a href=https://ocgi.github.io/en/docs/guides/squad_details/>Squad Introduction</a></li><li data-nav-id=https://ocgi.github.io/en/docs/guides/gpa/ title="GeneralPodAutoscaler Introduction" class="sidelist
+active"><a href=https://ocgi.github.io/en/docs/guides/gpa/>GeneralPodAutoscaler Introduction</a></li><li data-nav-id=https://ocgi.github.io/en/docs/guides/autoscaling_flow/ title="GameServer autoscaling workflow" class=sidelist><a href=https://ocgi.github.io/en/docs/guides/autoscaling_flow/>GameServer autoscaling workflow</a></li><li data-nav-id=https://ocgi.github.io/en/docs/guides/squad-scaledown-priority/ title="GamerServer scaling down priority" class=sidelist><a href=https://ocgi.github.io/en/docs/guides/squad-scaledown-priority/>GamerServer scaling down priority</a></li></ul></li><li data-nav-id=https://ocgi.github.io/en/docs/reference/ title=Reference class=sidelist><a href=https://ocgi.github.io/en/docs/reference/>Reference</a><ul><li data-nav-id=https://ocgi.github.io/en/docs/reference/sdk/ title="Carrier SDK" class=sidelist><a href=https://ocgi.github.io/en/docs/reference/sdk/>Carrier SDK</a></li><li data-nav-id=https://ocgi.github.io/en/docs/reference/gpa_webhook/ title="GPA Webhook example" class=sidelist><a href=https://ocgi.github.io/en/docs/reference/gpa_webhook/>GPA Webhook example</a></li></ul></li><li data-nav-id=https://ocgi.github.io/en/docs/examples/ title=Examples class=sidelist><a href=https://ocgi.github.io/en/docs/examples/>Examples</a></li><li data-nav-id=https://ocgi.github.io/en/docs/faq/ title="Frequently Asked Questions" class=sidelist><a href=https://ocgi.github.io/en/docs/faq/>Frequently Asked Questions</a></li></ul></li></ul></li></ul></div></div><div class=col-lg-9><div class="p-lg-5 p-4 bg-white"><h1 class=mb-5>GeneralPodAutoscaler Introduction</h1><div class=content><p>We can use <code>GeneralPodAutoscaler(GPA)</code> to scale the Pod horizontally. GPA is a component developed based on <code>K8s HPA (v2beta2 api)</code>.</p><h2 id=gpa-feature>GPA feature</h2><ol><li>It does not depend on the K8s version, it can run on K8s 1.8, 1.9, 1.19 and other versions, only the cluster supports CRD;</li><li>Through GPA&rsquo;s Provider, more external data sources can be supported, including kafka, redis, etc.;</li><li>Support more scaling modes, with greater flexibility and scalability;</li><li>GPA upgrades are flexible, and there is no need to restart K8s core components during upgrade.</li></ol><h2 id=design>Design</h2><h3 id=architecture>Architecture</h3><p><img src=/images/autoscaler.png alt=autoscaling></p><ul><li>GPA</li></ul><p>Deveoped based on the <a href=https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/>K8s HPA</a>, and fully compatible with HPA.</p><ul><li>External Metrics Provider</li></ul><p>Implement some external metrics Provider, and can scaling based on the external metrics.</p><h3 id=difference-between-gpa-and-hpa>Difference between GPA and HPA</h3><p>This is a example of workload using GPA and HPA.</p><ul><li>HPA</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>autoscaling/v2beta2</span>
+<span style=color:#f92672>kind</span>: <span style=color:#ae81ff>HorizontalPodAutoscaler</span>
+<span style=color:#f92672>metadata</span>:
+  <span style=color:#f92672>name</span>: <span style=color:#ae81ff>test</span>
+<span style=color:#f92672>spec</span>:
+  <span style=color:#f92672>maxReplicas</span>: <span style=color:#ae81ff>10</span>
+  <span style=color:#f92672>minReplicas</span>: <span style=color:#ae81ff>2</span>
+  <span style=color:#f92672>metrics</span>:
+  - <span style=color:#f92672>resource</span>:
+      <span style=color:#f92672>name</span>: <span style=color:#ae81ff>cpu</span>
+      <span style=color:#f92672>target</span>:
+        <span style=color:#f92672>averageValue</span>: <span style=color:#ae81ff>20</span>
+        <span style=color:#f92672>type</span>: <span style=color:#ae81ff>AverageValue</span>
+    <span style=color:#f92672>type</span>: <span style=color:#ae81ff>Resource</span>
+  <span style=color:#f92672>scaleTargetRef</span>:
+    <span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>carrier.ocgi.dev/v1alpha1</span>
+    <span style=color:#f92672>kind</span>: <span style=color:#ae81ff>Squad</span>
+    <span style=color:#f92672>name</span>: <span style=color:#ae81ff>squad-example1</span>
+</code></pre></div><ul><li>GPA</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>autoscaling.ocgi.dev/v1alpha1</span>
+<span style=color:#f92672>kind</span>: <span style=color:#ae81ff>GeneralPodAutoscaler</span>
+<span style=color:#f92672>metadata</span>:
+  <span style=color:#f92672>name</span>: <span style=color:#ae81ff>test</span>
+<span style=color:#f92672>spec</span>:
+  <span style=color:#f92672>maxReplicas</span>: <span style=color:#ae81ff>10</span>
+  <span style=color:#f92672>minReplicas</span>: <span style=color:#ae81ff>2</span>
+  <span style=color:#f92672>metric</span>:   <span style=color:#75715e>##difference</span>
+    <span style=color:#f92672>metrics</span>:
+    - <span style=color:#f92672>resource</span>:
+        <span style=color:#f92672>name</span>: <span style=color:#ae81ff>cpu</span>
+        <span style=color:#f92672>target</span>:
+          <span style=color:#f92672>averageValue</span>: <span style=color:#ae81ff>20</span>
+          <span style=color:#f92672>type</span>: <span style=color:#ae81ff>AverageValue</span>
+      <span style=color:#f92672>type</span>: <span style=color:#ae81ff>Resource</span>
+  <span style=color:#f92672>scaleTargetRef</span>:
+    <span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>carrier.ocgi.dev/v1alpha1</span>
+    <span style=color:#f92672>kind</span>: <span style=color:#ae81ff>Squad</span>
+    <span style=color:#f92672>name</span>: <span style=color:#ae81ff>squad-example1</span>
+</code></pre></div><p>As we can see,</p><ul><li>GPA contains <code>metric</code> field in the spec, and the <code>metrics</code> field is embedded through metric</li><li>The spec in HPA yaml directly contains the <code>metrics</code> field</li></ul><p>In addition, GPA supports more scaling modes, including: <code>event</code>, <code>crontab</code>, <code>webhook</code>.</p><h4 id=spec-difference-between-gpa-and-hpa>Spec difference between GPA and HPA</h4><ul><li>HPA</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#75715e>// HorizontalPodAutoscalerSpec describes the desired functionality of the HorizontalPodAutoscaler.
+</span><span style=color:#75715e></span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>HorizontalPodAutoscalerSpec</span> <span style=color:#66d9ef>struct</span> {
+	<span style=color:#75715e>// scaleTargetRef points to the target resource to scale, and is used to the pods for which metrics
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// should be collected, as well as to actually change the replica count.
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>ScaleTargetRef</span> <span style=color:#a6e22e>CrossVersionObjectReference</span> <span style=color:#e6db74>`json:&#34;scaleTargetRef&#34; protobuf:&#34;bytes,1,opt,name=scaleTargetRef&#34;`</span>
+	<span style=color:#75715e>// minReplicas is the lower limit for the number of replicas to which the autoscaler
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// can scale down.  It defaults to 1 pod.  minReplicas is allowed to be 0 if the
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// alpha feature gate HPAScaleToZero is enabled and at least one Object or External
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// metric is configured.  Scaling is active as long as at least one metric value is
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// available.
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// +optional
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>MinReplicas</span> <span style=color:#f92672>*</span><span style=color:#66d9ef>int32</span> <span style=color:#e6db74>`json:&#34;minReplicas,omitempty&#34; protobuf:&#34;varint,2,opt,name=minReplicas&#34;`</span>
+	<span style=color:#75715e>// maxReplicas is the upper limit for the number of replicas to which the autoscaler can scale up.
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// It cannot be less that minReplicas.
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>MaxReplicas</span> <span style=color:#66d9ef>int32</span> <span style=color:#e6db74>`json:&#34;maxReplicas&#34; protobuf:&#34;varint,3,opt,name=maxReplicas&#34;`</span>
+	<span style=color:#75715e>// metrics contains the specifications for which to use to calculate the
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// desired replica count (the maximum replica count across all metrics will
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// be used).  The desired replica count is calculated multiplying the
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// ratio between the target value and the current value by the current
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// number of pods.  Ergo, metrics used must decrease as the pod count is
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// increased, and vice-versa.  See the individual metric source types for
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// more information about how each type of metric must respond.
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// If not set, the default metric will be set to 80% average CPU utilization.
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// +optional
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>Metrics</span> []<span style=color:#a6e22e>MetricSpec</span> <span style=color:#e6db74>`json:&#34;metrics,omitempty&#34; protobuf:&#34;bytes,4,rep,name=metrics&#34;`</span>
+
+	<span style=color:#75715e>// behavior configures the scaling behavior of the target
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// in both Up and Down directions (scaleUp and scaleDown fields respectively).
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// If not set, the default HPAScalingRules for scale up and scale down are used.
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// +optional
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>Behavior</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>HorizontalPodAutoscalerBehavior</span> <span style=color:#e6db74>`json:&#34;behavior,omitempty&#34; protobuf:&#34;bytes,5,opt,name=behavior&#34;`</span>
+}
+</code></pre></div><ul><li>GPA</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#75715e>// GeneralPodAutoscalerSpec describes the desired functionality of the GeneralPodAutoscaler.
+</span><span style=color:#75715e></span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>GeneralPodAutoscalerSpec</span> <span style=color:#66d9ef>struct</span> {
+	<span style=color:#75715e>// DrivenMode is the mode the open autoscaling mode if we do not need scaling according to metrics.
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// including MetricMode, TimeMode, EventMode, WebhookMode
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// +optional
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>AutoScalingDrivenMode</span> <span style=color:#e6db74>`json:&#34;,inline&#34;`</span>
+
+	<span style=color:#75715e>// scaleTargetRef points to the target resource to scale, and is used to the pods for which metrics
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// should be collected, as well as to actually change the replica count.
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>ScaleTargetRef</span> <span style=color:#a6e22e>CrossVersionObjectReference</span> <span style=color:#e6db74>`json:&#34;scaleTargetRef&#34; protobuf:&#34;bytes,1,opt,name=scaleTargetRef&#34;`</span>
+
+	<span style=color:#75715e>// minReplicas is the lower limit for the number of replicas to which the autoscaler
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// can scale down.  It defaults to 1 pod.  minReplicas is allowed to be 0 if the
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// alpha feature gate GPAScaleToZero is enabled and at least one Object or External
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// metric is configured.  Scaling is active as long as at least one metric value is
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// available.
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// +optional
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>MinReplicas</span> <span style=color:#f92672>*</span><span style=color:#66d9ef>int32</span> <span style=color:#e6db74>`json:&#34;minReplicas,omitempty&#34; protobuf:&#34;varint,2,opt,name=minReplicas&#34;`</span>
+
+	<span style=color:#75715e>// maxReplicas is the upper limit for the number of replicas to which the autoscaler can scale up.
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// It cannot be less that minReplicas.
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>MaxReplicas</span> <span style=color:#66d9ef>int32</span> <span style=color:#e6db74>`json:&#34;maxReplicas&#34; protobuf:&#34;varint,3,opt,name=maxReplicas&#34;`</span>
+
+	<span style=color:#75715e>// behavior configures the scaling behavior of the target
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// in both Up and Down directions (scaleUp and scaleDown fields respectively).
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// If not set, the default GPAScalingRules for scale up and scale down are used.
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// +optional
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>Behavior</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>GeneralPodAutoscalerBehavior</span> <span style=color:#e6db74>`json:&#34;behavior,omitempty&#34; protobuf:&#34;bytes,4,opt,name=behavior&#34;`</span>
+}
+
+<span style=color:#75715e>// ExternalAutoScalingDrivenMode defines the mode to trigger auto scaling
+</span><span style=color:#75715e></span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>AutoScalingDrivenMode</span> <span style=color:#66d9ef>struct</span> {
+	<span style=color:#75715e>// MetricMode is the metric driven mode.
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// +optional 
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>MetricMode</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>MetricMode</span> <span style=color:#e6db74>`json:&#34;metric,omitempty&#34; protobuf:&#34;bytes,1,opt,name=metric&#34;`</span>
+
+	<span style=color:#75715e>// Webhook defines webhook mode the allow us to revive requests to scale.
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// +optional
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>WebhookMode</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>WebhookMode</span> <span style=color:#e6db74>`json:&#34;webhook,omitempty&#34; protobuf:&#34;bytes,2,opt,name=webhook&#34;`</span>
+
+	<span style=color:#75715e>// Time defines the time driven mode, pod would auto scale to max if time reached
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// +optional
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>TimeMode</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>TimeMode</span> <span style=color:#e6db74>`json:&#34;time,omitempty&#34; protobuf:&#34;bytes,3,opt,name=time&#34;`</span>
+
+	<span style=color:#75715e>// EventMode is the event driven mode
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// +optional
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>EventMode</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>EventMode</span> <span style=color:#e6db74>`json:&#34;event,omitempty&#34; protobuf:&#34;bytes,4,opt,name=event&#34;`</span>
+}
+</code></pre></div><p>Compared with HPA, GPA supports more modes.</p><ul><li>MetricMode</li></ul><p>The usage of this mode is same with <a href=https://github.com/kubernetes/community/blob/master/contributors/design-proposals/autoscaling/hpa-v2.md>K8s HPA</a>.</p><ul><li>WebhookMode</li></ul><p>Webhook mode supports application to provide a webhook server, which are called by GPA. Its definition is as follows:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#75715e>// WebhookMode allow users to provider a server
+</span><span style=color:#75715e></span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>WebhookMode</span> <span style=color:#66d9ef>struct</span> {
+	<span style=color:#f92672>*</span><span style=color:#a6e22e>admregv1b</span>.<span style=color:#a6e22e>WebhookClientConfig</span> <span style=color:#e6db74>`json:&#34;,inline&#34;`</span>
+	<span style=color:#75715e>// Parameters are the webhook parameters
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>Parameters</span> <span style=color:#66d9ef>map</span>[<span style=color:#66d9ef>string</span>]<span style=color:#66d9ef>string</span> <span style=color:#e6db74>`json:&#34;parameters,omitempty&#34; protobuf:&#34;bytes,1,opt,name=parameters&#34;`</span>
+}
+</code></pre></div><ul><li>TimeMode</li></ul><p>TimeMode supports Crontab mode, which can configure multiple time periods and scale up the workload to a specified number of replicas.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#75715e>// TimeMode is a mode allows user to define a crontab regular
+</span><span style=color:#75715e></span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>TimeMode</span> <span style=color:#66d9ef>struct</span> {
+	<span style=color:#75715e>// TimeRanges defines a array that for time driven mode
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>TimeRanges</span> []<span style=color:#a6e22e>TimeRange</span> <span style=color:#e6db74>`json:&#34;ranges,omitempty&#34; protobuf:&#34;bytes,1,opt,name=ranges&#34;`</span>
+}
+
+<span style=color:#75715e>// TimeTimeRange is a mode allows user to define a crontab regular
+</span><span style=color:#75715e></span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>TimeRange</span> <span style=color:#66d9ef>struct</span> {
+<span style=color:#75715e>// Schedule should match crontab format
+</span><span style=color:#75715e></span><span style=color:#a6e22e>Schedule</span> <span style=color:#66d9ef>string</span> <span style=color:#e6db74>`json:&#34;schedule,omitempty&#34; protobuf:&#34;bytes,1,opt,name=schedule&#34;`</span>
+
+<span style=color:#75715e>// DesiredReplicas is the desired replicas required by timemode,
+</span><span style=color:#75715e></span><span style=color:#a6e22e>DesiredReplicas</span> <span style=color:#66d9ef>int32</span> <span style=color:#e6db74>`json:&#34;desiredReplicas,omitempty&#34; protobuf:&#34;varint,2,opt,name=desiredReplicas&#34;`</span>
+}
+</code></pre></div><ul><li>EventMode</li></ul><p>EventMode supports the use of external data sources including kafka, redis, etc.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#75715e>// EventMode is the event driven mode
+</span><span style=color:#75715e></span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>EventMode</span> <span style=color:#66d9ef>struct</span> {
+    <span style=color:#75715e>// Triggers are thr event triggers
+</span><span style=color:#75715e></span>    <span style=color:#a6e22e>Triggers</span> []<span style=color:#a6e22e>ScaleTriggers</span> <span style=color:#e6db74>`json:&#34;triggers&#34;`</span>
+}
+
+<span style=color:#75715e>// ScaleTriggers reference the scaler that will be used
+</span><span style=color:#75715e></span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>ScaleTriggers</span> <span style=color:#66d9ef>struct</span> {
+	<span style=color:#75715e>// Type are the trigger type
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>Type</span> <span style=color:#66d9ef>string</span> <span style=color:#e6db74>`json:&#34;type&#34;`</span>
+	<span style=color:#75715e>// Name is the trigger name
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// +optional
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>Name</span> <span style=color:#66d9ef>string</span> <span style=color:#e6db74>`json:&#34;name,omitempty&#34;`</span>
+	<span style=color:#75715e>// Metadata contains the trigger config
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>Metadata</span> <span style=color:#66d9ef>map</span>[<span style=color:#66d9ef>string</span>]<span style=color:#66d9ef>string</span> <span style=color:#e6db74>`json:&#34;metadata&#34;`</span>
+}
+</code></pre></div><h2 id=questions>Questions</h2><h3 id=how-to-scale-up-squad>How to scale up Squad</h3><p>Scaling up <code>Squad</code> has the same behavior as other workloads, such as <code>Deployment</code>. GPA will only modify the replicas field of the workload, and the specific behavior is controlled by the corresponding controller.</p><h3 id=how-to-scale-down-squad>How to scale down Squad</h3><p>Squad scaling donw workflow:</p><p><img src=/images/pa_gs_scaledown.png alt="OCGI autoscaling"></p><h3 id=how-to-define-scaling-behavior>How to define scaling behavior</h3><p>We can define scaling behavior in <code>Spec</code>:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#75715e>// GeneralPodAutoscalerBehavior configures the scaling behavior of the target
+</span><span style=color:#75715e>// in both Up and Down directions (scaleUp and scaleDown fields respectively).
+</span><span style=color:#75715e></span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>GeneralPodAutoscalerBehavior</span> <span style=color:#66d9ef>struct</span> {
+	<span style=color:#75715e>// scaleUp is scaling policy for scaling Up.
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// If not set, the default value is the higher of:
+</span><span style=color:#75715e></span>	<span style=color:#75715e>//   * increase no more than 4 pods per 60 seconds
+</span><span style=color:#75715e></span>	<span style=color:#75715e>//   * double the number of pods per 60 seconds
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// No stabilization is used.
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// +optional
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>ScaleUp</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>GPAScalingRules</span> <span style=color:#e6db74>`json:&#34;scaleUp,omitempty&#34; protobuf:&#34;bytes,1,opt,name=scaleUp&#34;`</span>
+	<span style=color:#75715e>// scaleDown is scaling policy for scaling Down.
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// If not set, the default value is to allow to scale down to minReplicas pods, with a
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// 300 second stabilization window (i.e., the highest recommendation for
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// the last 300sec is used).
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// +optional
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>ScaleDown</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>GPAScalingRules</span> <span style=color:#e6db74>`json:&#34;scaleDown,omitempty&#34; protobuf:&#34;bytes,2,opt,name=scaleDown&#34;`</span>
+}
+</code></pre></div><p>Exmaples:</p><ul><li>Only scale down one replica in 60 seconds</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>autoscaling.ocgi.dev/v1alpha1</span>
+<span style=color:#f92672>kind</span>: <span style=color:#ae81ff>GeneralPodAutoscaler</span>
+<span style=color:#f92672>metadata</span>:
+  <span style=color:#f92672>name</span>: <span style=color:#ae81ff>pa-squad-metric</span>
+<span style=color:#f92672>spec</span>:
+  <span style=color:#f92672>maxReplicas</span>: <span style=color:#ae81ff>10</span>
+  <span style=color:#f92672>minReplicas</span>: <span style=color:#ae81ff>2</span>
+  <span style=color:#f92672>metric</span>:
+    <span style=color:#f92672>metrics</span>:
+    - <span style=color:#f92672>resource</span>:
+        <span style=color:#f92672>name</span>: <span style=color:#ae81ff>cpu</span>
+        <span style=color:#f92672>target</span>:
+          <span style=color:#f92672>averageValue</span>: <span style=color:#ae81ff>20</span>
+          <span style=color:#f92672>type</span>: <span style=color:#ae81ff>AverageValue</span>
+      <span style=color:#f92672>type</span>: <span style=color:#ae81ff>Resource</span>
+  <span style=color:#f92672>scaleTargetRef</span>:
+    <span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>carrier.ocgi.dev/v1alpha1</span>
+    <span style=color:#f92672>kind</span>: <span style=color:#ae81ff>Squad</span>
+    <span style=color:#f92672>name</span>: <span style=color:#ae81ff>squad-example1</span>
+  <span style=color:#f92672>behavior</span>:
+    <span style=color:#f92672>scaleDown</span>:
+      <span style=color:#f92672>stabilizationWindowSeconds</span>: <span style=color:#ae81ff>300</span> <span style=color:#75715e>## default 300 for scale down; 0 for scale up</span>
+      <span style=color:#f92672>policies</span>:
+      - <span style=color:#f92672>type</span>: <span style=color:#ae81ff>Pods</span>
+        <span style=color:#f92672>value</span>: <span style=color:#ae81ff>1</span>
+        <span style=color:#f92672>periodSeconds</span>: <span style=color:#ae81ff>60</span>
+      <span style=color:#f92672>selectPolicy: Max # Max, or Min, used when we have multiple policies. Disabled</span>: <span style=color:#ae81ff>not scale down.</span>
+</code></pre></div><ul><li>Only scale down 10% replicas in 60 seconds</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>autoscaling.ocgi.dev/v1alpha1</span>
+<span style=color:#f92672>kind</span>: <span style=color:#ae81ff>GeneralPodAutoscaler</span>
+<span style=color:#f92672>metadata</span>:
+  <span style=color:#f92672>name</span>: <span style=color:#ae81ff>pa-squad-metric</span>
+<span style=color:#f92672>spec</span>:
+  <span style=color:#f92672>maxReplicas</span>: <span style=color:#ae81ff>10</span>
+  <span style=color:#f92672>minReplicas</span>: <span style=color:#ae81ff>2</span>
+  <span style=color:#f92672>metric</span>:
+    <span style=color:#f92672>metrics</span>:
+    - <span style=color:#f92672>resource</span>:
+        <span style=color:#f92672>name</span>: <span style=color:#ae81ff>cpu</span>
+        <span style=color:#f92672>target</span>:
+          <span style=color:#f92672>averageValue</span>: <span style=color:#ae81ff>20</span>
+          <span style=color:#f92672>type</span>: <span style=color:#ae81ff>AverageValue</span>
+      <span style=color:#f92672>type</span>: <span style=color:#ae81ff>Resource</span>
+  <span style=color:#f92672>scaleTargetRef</span>:
+    <span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>carrier.ocgi.dev/v1alpha1</span>
+    <span style=color:#f92672>kind</span>: <span style=color:#ae81ff>Squad</span>
+    <span style=color:#f92672>name</span>: <span style=color:#ae81ff>squad-example1</span>
+  <span style=color:#f92672>behavior</span>:
+    <span style=color:#f92672>scaleDown</span>:
+      <span style=color:#f92672>policies</span>:
+      - <span style=color:#f92672>type</span>: <span style=color:#ae81ff>Percent</span>
+        <span style=color:#f92672>value</span>: <span style=color:#ae81ff>10</span>
+        <span style=color:#f92672>periodSeconds</span>: <span style=color:#ae81ff>60</span>
+</code></pre></div><p>The configuration of scaling-up is same with the scaling-down.</p><p>The <code>Scaling behavior</code> of GPA is same with the <a href=https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-configurable-scaling-behavior>K8s HPA <code>Scaling behavior</code></a>.</p></div><p class="post-meta border-bottom pb-3 mb-0 mt-3">Updated on 2020-11-24</p></p><nav class="pagination mt-3"><a class="nav nav-prev" href=https://ocgi.github.io/en/docs/guides/squad_details/><i class="ti-arrow-left mr-2"></i> <span class="d-none d-md-block">Squad Introduction</span></a>
+<a class="nav nav-next" href=https://ocgi.github.io/en/docs/guides/autoscaling_flow/><span class="d-none d-md-block">GameServer autoscaling workflow</span><i class="ti-arrow-right ml-2"></i></a></nav></div></div></div></div></section><footer class="section pb-4"><div class=container><div class="row align-items-center"><div class="col-md-8 text-md-left text-center"><p class="mb-md-0 mb-4">Copyright © 2021 The OCGI Authors</p></div><div class="col-md-4 text-md-right text-center"><ul class=list-inline></ul></div></div></div></footer><script src=https://ocgi.github.io/js/script.min.js></script></body></html>
