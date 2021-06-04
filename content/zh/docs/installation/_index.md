@@ -18,9 +18,9 @@ customresourcedefinition.apiextensions.k8s.io/squads.carrier.ocgi.dev created
 
 # kubectl get crd
 NAME                                    CREATED AT
-gameservers.agones.dev                  2020-11-08T04:07:32Z
 gameservers.carrier.ocgi.dev            2020-11-23T06:48:59Z
 gameserversets.carrier.ocgi.dev         2020-11-23T06:48:59Z
+squads.carrier.ocgi.dev                 2020-11-23T06:48:59Z
 ...
 ```
 
