@@ -6,6 +6,8 @@ title: "Installation"
 
 OCGI的组件，主要包括`Carrier` controller，`GPA` controller，`cost-server`等。
 
+> 文档中的所有示例都在[TKE](https://cloud.tencent.com/product/tke)中运行过。
+
 ## 部署Carrier controller
 
   * 创建CRD

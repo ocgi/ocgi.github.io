@@ -6,6 +6,8 @@ title: "Installation"
 
 The components of OCGI mainly include `Carrier` controller, `GPA` controller, and `cost-server`, etc.
 
+> We have ran all examples on [TKE](https://cloud.tencent.com/product/tke).
+ 
 ## Install Carrier controller
 
   * Install CRD
