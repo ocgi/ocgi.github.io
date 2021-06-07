@@ -13,7 +13,7 @@ The components of OCGI mainly include `Carrier` controller, `GPA` controller, an
   * Install CRD
 
 ```shell script
-# kubectl apply -f https://github.com/ocgi/carrier/blob/master/config/crd.yaml 
+# kubectl apply -f https://github.com/ocgi/carrier/blob/master/manifeasts/crd.yaml
 customresourcedefinition.apiextensions.k8s.io/gameservers.carrier.ocgi.dev created
 customresourcedefinition.apiextensions.k8s.io/gameserversets.carrier.ocgi.dev created
 customresourcedefinition.apiextensions.k8s.io/squads.carrier.ocgi.dev created
@@ -29,7 +29,7 @@ squads.carrier.ocgi.dev                 2020-11-23T06:48:59Z
   * Install Carrier
 
 ```shell script
-# kubectl apply -f https://github.com/ocgi/carrier/blob/master/deployment/deploy.yaml 
+# kubectl apply -f https://github.com/ocgi/carrier/blob/master/manifeasts/deploy.yaml
 serviceaccount/carrier created
 clusterrolebinding.rbac.authorization.k8s.io/carrier created
 deployment.apps/carrier created
@@ -40,7 +40,7 @@ deployment.apps/carrier created
   The service account is uesed by SDK-Sever, which is automatically injected into the application Pod as a Sidecar and accesses kube-apiserver.
 
 ```shell script
-# kubectl apply -f https://github.com/ocgi/carrier-sdk/blob/master/deployment/serviceaccount.yaml
+# kubectl apply -f https://github.com/ocgi/carrier-sdk/blob/master/manifeasts/serviceaccount.yaml
 clusterrole.rbac.authorization.k8s.io/carrier-sdk created
 serviceaccount/carrier-sdk created
 rolebinding.rbac.authorization.k8s.io/carrier-sdk-access created
