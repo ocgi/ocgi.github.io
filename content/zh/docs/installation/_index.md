@@ -13,7 +13,7 @@ OCGI的组件，主要包括`Carrier` controller，`GPA` controller，`cost-serv
   * 创建CRD
 
 ```shell script
-# kubectl apply -f https://github.com/ocgi/carrier/blob/master/config/crd.yaml 
+# kubectl apply -f https://github.com/ocgi/carrier/blob/master/manifeasts/crd.yaml
 customresourcedefinition.apiextensions.k8s.io/gameservers.carrier.ocgi.dev created
 customresourcedefinition.apiextensions.k8s.io/gameserversets.carrier.ocgi.dev created
 customresourcedefinition.apiextensions.k8s.io/squads.carrier.ocgi.dev created
@@ -29,7 +29,7 @@ squads.carrier.ocgi.dev                 2020-11-23T06:48:59Z
   * 部署Carrier
 
 ```shell script
-# kubectl apply -f https://github.com/ocgi/carrier/blob/master/deployment/deploy.yaml 
+# kubectl apply -f https://github.com/ocgi/carrier/blob/master/manifeasts/deploy.yaml
 serviceaccount/carrier created
 clusterrolebinding.rbac.authorization.k8s.io/carrier created
 deployment.apps/carrier created
