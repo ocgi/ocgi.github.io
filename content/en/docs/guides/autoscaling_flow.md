@@ -5,7 +5,7 @@ weight: 4
 
 The main flow of `GameServer` autoscaling is as follows:
 
-![autoscaler archtecture](/images/autoscaler_archtecture.jpg)
+![autoscaler archtecture](/images/autoscaler_archtecture.png)
 
 * The Autoscaler controller calculates a reasonable number of copies of Squad according to the metric information of GameServer;
 
