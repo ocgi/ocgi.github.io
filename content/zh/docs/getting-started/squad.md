@@ -33,10 +33,6 @@ spec:
         containerPort: 7654
         name: default
         protocol: TCP
-      sdkServer:
-        grpcPort: 9020
-        httpPort: 9021
-        logLevel: Info
       template:
         spec:
           containers:
