@@ -53,4 +53,5 @@ func IsDeletable(gs *carrierv1alpha1.GameServer) bool {
 }
 ```
 
-Similarly, Squad supports graceful updates. You can specify `carrier.ocgi.dev/graceful-update: "true"` in Squad's annotations. In this way, when Squad updates and deletes GameServer, it will also check the DeleteableGates condition.
+Similarly, Squad supports graceful updates. When Squad updates and deletes GameServer, it will also check the 
+DeleteableGates condition.

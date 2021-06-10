@@ -53,4 +53,4 @@ func IsDeletable(gs *carrierv1alpha1.GameServer) bool {
 }
 ```
 
-同样，Squad支持优雅更新，可以在Squad的annotations指定`carrier.ocgi.dev/graceful-update: "true"`。这样，当Squad做更新删除GameServer时，也会检查`DeletableGates Condition`。
+同样，Squad支持优雅更新，当Squad做更新删除GameServer时，也会检查`DeletableGates Condition`。
